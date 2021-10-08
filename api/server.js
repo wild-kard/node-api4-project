@@ -1,6 +1,6 @@
 const express = require("express")
 const cors = require("cors")
-const userData = require("../dummyData/userData")
+const userData = require("../dummyData/data.js")
 
 const server = express()
 server.use(express.json())
@@ -8,7 +8,7 @@ server.use(cors())
 
 server.get("/", (req,res)=>{
     res.send(
-        <h1>welcome to the API thunder dome!</h1>
+        `<h1>welcome to the API thunder dome!</h1>`
     )
 })
 
@@ -30,8 +30,7 @@ server.post("/api/login", (req,res)=>{
     const auth = req.body
     const authenticated = userData.filter((user) =>{
         if(
-            user.username === auth.username 
-            &&
+            user.username === auth.username &&
             user.password === auth.password
         ){
             return user
@@ -40,7 +39,7 @@ server.post("/api/login", (req,res)=>{
         }
     })
     if (!authenticated[0]){
-        console.log("authentication successful", authentication)
+        console.log("authentication successful", authenticated)
         res.status(200).json({message: `welcome back ${auth.username}`})
     }
 })
